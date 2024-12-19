@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Music Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Online Music Downloader</h1>
+        <input type="text" id="searchQuery" placeholder="Search for music files online...">
+		<button id="searchButton" onclick="searchMusic()">Search</button>
+        
+        <input type="text" id="musicUrl" placeholder="Enter music URL here...">
+        <button id="downloadButton" onclick="downloadMusic()">Download</button>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        function searchMusic() {
+            const searchQuery = document.getElementById('searchQuery').value.trim();
+            const message = document.getElementById('message');
+
+            if (!searchQuery) {
+                message.textContent = 'Please enter a search query.';
+                message.style.color = 'red';
+                return;
+            }
+
+            message.textContent = `Searching for "${searchQuery}"...`;
+            message.style.color = 'blue';
+
+            // Simulating a search process
+            setTimeout(() => {
+                message.textContent = `Found results for "${searchQuery}". Use the URL field to download.`;
+                message.style.color = 'green';
+            }, 2000);
+        }
+
+        function downloadMusic() {
+            const urlInput = document.getElementById('musicUrl');
+            const message = document.getElementById('message');
+            const url = urlInput.value.trim();
+
+            if (!url) {
+                message.textContent = 'Please enter a valid URL.';
+                message.style.color = 'red';
+                return;
+            }
+
+            message.textContent = 'Preparing your download...';
+            message.style.color = 'blue';
+
+            // Simulating the download process
+            setTimeout(() => {
+                message.textContent = '';
+
+                // Simulate download by creating a link
+                const a = document.createElement('a');
+                a.href = url; // In a real app, this would point to a processed file URL
+                a.download = 'music.mp3'; // Default file name
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                message.textContent = 'Download started!';
+                message.style.color = 'green';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
